@@ -16,13 +16,20 @@ class HelloWorld(AbstractLambda):
         _LOG.info(f"Received context: {context} \t {repr(context)}")
         _LOG.info(f"HTTP Method: {method}")
         _LOG.info(f"Path: {path}")
-        return {
-            "statusCode": 200,
-            "message": "Hello from Lambda"
-        } if '/hello' == path.lower() and 'get' == method.lower() else {
-            "statusCode": 400,
-            "message": f"Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
-        }
+        if '/hello' == path.lower() and 'get' == method.lower():
+            return {
+                "statusCode": 200,
+                'body': {
+                    "statusCode": 200,
+                    "message": "Hello from Lambda"
+                }}
+        else:
+            return {
+                "statusCode": 400,
+                'body': {
+                    "statusCode": 400,
+                    "message": f"Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
+                }}
 
 
 HANDLER = HelloWorld()
