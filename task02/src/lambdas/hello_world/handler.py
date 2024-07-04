@@ -10,8 +10,8 @@ class HelloWorld(AbstractLambda):
         pass
 
     def handle_request(self, event, context):
-        method = event.get('httpMethod') or 'NONE'
-        path = event.get('path') or 'NONE'
+        method = _read(event, 'requestContext', 'http', 'method')
+        path = _read(event, 'requestContext', 'http', 'path')
         _LOG.info(f"Received event: {event} \t {repr(event)}")
         _LOG.info(f"Received context: {context} \t {repr(context)}")
         _LOG.info(f"HTTP Method: {method}")
@@ -26,6 +26,15 @@ class HelloWorld(AbstractLambda):
 
 
 HANDLER = HelloWorld()
+
+
+def _read(data, *keys):
+    for key in keys:
+        if isinstance(data, dict):
+            data = data.get(key)
+        else:
+            return None
+    return data
 
 
 def lambda_handler(event, context):
