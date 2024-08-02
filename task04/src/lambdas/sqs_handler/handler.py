@@ -10,7 +10,8 @@ class SqsHandler(AbstractLambda):
         pass
         
     def handle_request(self, event, context):
-        _LOG.log(event)
+        _LOG.error(event)
+        _LOG.warn(context)
         return 200
     
 
