@@ -18,11 +18,9 @@ class HelloWorld(AbstractLambda):
         # _LOG.info(f"Path: {path}")
         # if '/hello' == path.lower() and 'get' == method.lower():
         return {
-            "statusCode": 200,
-            'body': {
                 "statusCode": 200,
                 "message": "Hello from Lambda"
-            }}
+            }
         # return 400
 
     def _read(self, data, *keys):
