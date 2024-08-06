@@ -9,7 +9,7 @@
   "timeout": 100,
   "lambda_path": "lambdas/sqs_handler",
   "dependencies": [{
-            "resource_type": "sqs_queue",
+            "resource_type": "sqs_trigger",
             "resource_name": "async_queue"
         }],
   "event_sources": [{
